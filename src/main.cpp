@@ -366,21 +366,9 @@ private:
     }
 
     void createGraphicsPipeline() {
-        /*auto vertShaderCode = readFile("shaders/vert.spv");
-        auto fragShaderCode = readFile("shaders/frag.spv");*/
-
         VkShaderModule vertShaderModule;
         VkShaderModule fragShaderModule;
 
-        /*vertShaderModule = createShaderModule(vertShaderCode);
-        fragShaderModule = createShaderModule(fragShaderCode);*/
-        /*std::vector<uint32_t> vertShaderCode(VERTEX_SHADER,
-                VERTEX_SHADER + sizeof(VERTEX_SHADER)/sizeof(VERTEX_SHADER[0]));
-        std::vector<uint32_t> fragShaderCode(FRAGMENT_SHADER,
-                FRAGMENT_SHADER 
-                + sizeof(FRAGMENT_SHADER)/sizeof(FRAGMENT_SHADER[0]));
-        vertShaderModule = createShaderModule(vertShaderCode);
-        fragShaderModule = createShaderModule(fragShaderCode);*/
         vertShaderModule = createShaderModule(VERTEX_SHADER,
                 sizeof(VERTEX_SHADER));
         fragShaderModule = createShaderModule(FRAGMENT_SHADER,
@@ -925,36 +913,6 @@ private:
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = codeSize;
         createInfo.pCode = code;
-
-        VkShaderModule shaderModule;
-        if(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule)
-                != VK_SUCCESS) {
-            throw std::runtime_error("Failed to create shader module.");
-        }
-
-        return shaderModule;
-    }
-
-    VkShaderModule createShaderModule(const std::vector<uint32_t>& code) {
-        VkShaderModuleCreateInfo createInfo = {};
-        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-        createInfo.codeSize = code.size() * sizeof(uint32_t);
-        createInfo.pCode = code.data();
-
-        VkShaderModule shaderModule;
-        if(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule)
-                != VK_SUCCESS) {
-            throw std::runtime_error("Failed to create shader module.");
-        }
-
-        return shaderModule;
-    }
-
-    VkShaderModule createShaderModule(const std::vector<char>& code) {
-        VkShaderModuleCreateInfo createInfo = {};
-        createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
-        createInfo.codeSize = code.size();
-        createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
 
         VkShaderModule shaderModule;
         if(vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule)
