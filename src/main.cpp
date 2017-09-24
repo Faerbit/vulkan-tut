@@ -12,8 +12,8 @@
 #include <string.h>
 
 // compiled shaders:
-#include <vertexShader.h>
-#include <fragmentShader.h>
+#include <shaders/vertexShader.h>
+#include <shaders/fragmentShader.h>
 
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 600;
